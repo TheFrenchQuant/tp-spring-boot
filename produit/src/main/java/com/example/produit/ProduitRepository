@@ -1,0 +1,12 @@
+package com.example.produit;
+
+import java.util.List;
+
+import org.springframework.data.repository.CrudRepository;
+
+public interface CustomerRepository extends CrudRepository<Produit, Long> {
+
+  List<Produit> findByName(String Name);
+
+  Produit findById(long id);
+} 
