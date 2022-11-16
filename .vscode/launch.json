@@ -12,21 +12,21 @@
         },
         {
             "type": "java",
-            "name": "Spring Boot-ProduitApplication<produit>",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "mainClass": "com.example.produit.ProduitApplication",
-            "projectName": "produit",
-            "args": "",
-            "envFile": "${workspaceFolder}/.env"
-        },
-        {
-            "type": "java",
             "name": "Spring Boot-EurekaApplication<eureka>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "mainClass": "com.example.eureka.EurekaApplication",
             "projectName": "eureka",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ProductApplication<product>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.product.ProductApplication",
+            "projectName": "product",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }

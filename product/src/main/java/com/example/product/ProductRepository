@@ -1,10 +1,10 @@
-package com.example.produit;
+package com.example.product;
 
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface CustomerRepository extends CrudRepository<Produit, Long> {
+public interface ProductRepository extends CrudRepository<Product, Long> {
 
   List<Produit> findByName(String Name);
 

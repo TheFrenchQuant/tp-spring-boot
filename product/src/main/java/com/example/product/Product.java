@@ -1,4 +1,4 @@
-package com.example.produit;
+package com.example.product;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Produit {
+public class Product {
 
   @Id
   @GeneratedValue(strategy=GenerationType.AUTO)
@@ -15,9 +15,9 @@ public class Produit {
   private Float price;
   private Long quantity;
 
-  protected Produit() {}
+  protected Product() {}
 
-  public Produit(String name, Float price, Long quantity) {
+  public Product(String name, Float price, Long quantity) {
     this.name = name;
     this.price = price;
     this.quantity= quantity;

@@ -10,7 +10,7 @@
 
     <modules>
       <module>eureka</module>
-      <module>produit</module>
+      <module>product</module>
       <module>admin</module>
     </modules>
 </project>

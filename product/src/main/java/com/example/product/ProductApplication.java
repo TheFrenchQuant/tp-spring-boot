@@ -1,4 +1,4 @@
-package com.example.produit;
+package com.example.product;
 
 import java.util.List;
 
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-public class ProduitApplication {
+public class ProductApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProduitApplication.class, args);
+		SpringApplication.run(ProductApplication.class, args);
 	}
 }
 
