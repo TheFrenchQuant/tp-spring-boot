@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 //actuellement 8080
 @RestController
 //@RequestMapping("/api") // faire des chemins corrects
+
+// Implémenter plus de request si nécessaire et virer celles inutiles
 public class ProductController {
 
 	@Autowired
