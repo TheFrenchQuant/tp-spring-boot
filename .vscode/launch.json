@@ -22,11 +22,11 @@
         },
         {
             "type": "java",
-            "name": "Spring Boot-ProductApplication<product>",
+            "name": "Spring Boot-JpaApplication<jpa>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "mainClass": "com.example.product.ProductApplication",
-            "projectName": "product",
+            "mainClass": "com.example.jpa.JpaApplication",
+            "projectName": "jpa",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
