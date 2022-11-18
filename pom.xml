@@ -3,14 +3,14 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.example</groupId>
+    <groupId>fr.ensimag</groupId>
     <artifactId>tp-spring-boot</artifactId>
     <version>0.1.0</version>
     <packaging>pom</packaging>
 
     <modules>
       <module>eureka</module>
-      <module>jpa</module>
       <module>admin</module>
+      <module>product</module>
     </modules>
 </project>

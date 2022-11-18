@@ -2,31 +2,31 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Spring Boot-AdminApplication<admin>",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "mainClass": "com.example.admin.AdminApplication",
-            "projectName": "admin",
-            "args": "",
-            "envFile": "${workspaceFolder}/.env"
-        },
-        {
-            "type": "java",
             "name": "Spring Boot-EurekaApplication<eureka>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "mainClass": "com.example.eureka.EurekaApplication",
+            "mainClass": "fr.ensimag.eureka.EurekaApplication",
             "projectName": "eureka",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         },
         {
             "type": "java",
-            "name": "Spring Boot-JpaApplication<jpa>",
+            "name": "Spring Boot-AdminApplication<admin>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "mainClass": "com.example.jpa.JpaApplication",
-            "projectName": "jpa",
+            "mainClass": "fr.ensimag.admin.AdminApplication",
+            "projectName": "admin",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ProductApplication<product>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "fr.ensimag.product.ProductApplication",
+            "projectName": "product",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
