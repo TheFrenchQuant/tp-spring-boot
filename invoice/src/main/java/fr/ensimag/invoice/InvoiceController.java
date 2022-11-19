@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 //import java.net.URI;
-import org.springframework.web.client.RestTemplate;
+//import org.springframework.web.client.RestTemplate;
 
-import fr.ensimag.product.Product;
+//import fr.ensimag.product.Product;
 
 @RestController
 public class InvoiceController {
@@ -53,7 +53,7 @@ public class InvoiceController {
 	public ResponseEntity<Invoice> createInvoice(@RequestBody Invoice invoice) {
 		try {
 			Invoice _invoice = InvoiceRepository
-					.save(new Invoice(invoice.getClient(), invoice.getOrder()));
+					.save(new Invoice(invoice.getClient(), invoice.getProductsOrder()));
 			return new ResponseEntity<>(_invoice, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -67,7 +67,7 @@ public class InvoiceController {
 		if (invoiceData.isPresent()) {
 			Invoice _invoice = invoiceData.get();
 			_invoice.setClient(invoice.getClient());
-			_invoice.setOrder(invoice.getOrder());
+			_invoice.setProductsOrder(invoice.getProductsOrder());
 			return new ResponseEntity<>(InvoiceRepository.save(_invoice), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -84,7 +84,7 @@ public class InvoiceController {
 		}
 	}
 
-	@DeleteMapping("/invoces")
+	@DeleteMapping("/invoices")
 	public ResponseEntity<HttpStatus> deleteAllInvoices() {
 		try {
 			InvoiceRepository.deleteAll();
@@ -95,36 +95,36 @@ public class InvoiceController {
 
 	}
 
-	@GetMapping("/invoices/{id}/count")
-	public ResponseEntity<Long> getInvoiceCount(@PathVariable("id") long id) {
-		Optional<Invoice> invoiceData = InvoiceRepository.findById(id);
+	// @GetMapping("/invoices/{id}/count")
+	// public ResponseEntity<Long> getInvoiceCount(@PathVariable("id") long id) {
+	// 	Optional<Invoice> invoiceData = InvoiceRepository.findById(id);
 
-		if (invoiceData.isPresent()) {
-			//List<Product> products = RestTemplate().getForObject(uri, Employee[].class);
-			return new ResponseEntity<>(invoiceData.get().getNumberOfProduct(), HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
+	// 	if (invoiceData.isPresent()) {
+	// 		//List<Product> products = RestTemplate().getForObject(uri, Employee[].class);
+	// 		return new ResponseEntity<>(invoiceData.get().getNumberOfProduct(), HttpStatus.OK);
+	// 	} else {
+	// 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	// 	}
+	// }
 
-	@GetMapping("/invoices/{id}/cost")
-	public ResponseEntity<Float> getInvoice(@PathVariable("id") long id) {
-		Optional<Invoice> invoiceData = InvoiceRepository.findById(id);
+	// @GetMapping("/invoices/{id}/cost")
+	// public ResponseEntity<Float> getInvoice(@PathVariable("id") long id) {
+	// 	Optional<Invoice> invoiceData = InvoiceRepository.findById(id);
 
-		if (invoiceData.isPresent()) {
-			String uri = "http://localhost:8080/products/list/{ids}";
-			String ids = String.join(",", invoiceData.get().productsOrder.keySet().toArray(new String[0]));
-			RestTemplate restTemplate = new RestTemplate();
-			Product[] products = restTemplate.getForObject(uri, Product[].class,ids);
-			if(products!=null){
-				Float cost = 0f;
-				for (Product product : products){
-				cost+=product.getPrice()*invoiceData.get().productsOrder.get(product.getId().toString());
-				}
-				return new ResponseEntity<>(cost, HttpStatus.OK);
-			}
-		}
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	}
+	// 	if (invoiceData.isPresent()) {
+	// 		String uri = "http://localhost:8080/products/list/{ids}";
+	// 		String ids = String.join(",", invoiceData.get().productsOrder.keySet().toArray(new String[0]));
+	// 		RestTemplate restTemplate = new RestTemplate();
+	// 		Product[] products = restTemplate.getForObject(uri, Product[].class,ids);
+	// 		if(products!=null){
+	// 			Float cost = 0f;
+	// 			for (Product product : products){
+	// 			cost+=product.getPrice()*invoiceData.get().productsOrder.get(product.getId().toString());
+	// 			}
+	// 			return new ResponseEntity<>(cost, HttpStatus.OK);
+	// 		}
+	// 	}
+	// 	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	// }
 
 }

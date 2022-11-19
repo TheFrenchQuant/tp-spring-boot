@@ -1,6 +1,6 @@
 package fr.ensimag.invoice;
 
-import java.util.*;
+//import java.util.*;
 import javax.persistence.*;
 
 @Entity
@@ -9,16 +9,22 @@ public class Invoice {
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private Long id;
+
   private String client;
   
   @Lob
-  Map<String, Long> productsOrder;
+  Long[][] productsOrder;
   //private Long[] products;
   //private Long[] quantity;
 
   protected Invoice() {}
 
-  public Invoice(String client,  Map<String, Long> productsOrder) {
+  public Invoice(String client,  Long[][] productsOrder) {
+    for (Long[] array : productsOrder){
+      if (array == null || array.length != 2){
+          throw new IllegalArgumentException("size should be 2 for all arrays");
+      } 
+  } 
     this.client = client;
     this.productsOrder = productsOrder;
   }
@@ -42,20 +48,25 @@ public class Invoice {
 		this.client = client;
 	}
 
-  public Map<String, Long> getOrder() {
+  public Long[][] getProductsOrder() {
     return productsOrder;
   }
 
-  public void setOrder(Map<String, Long> productsOrder) {
+  public void setProductsOrder(Long[][] productsOrder) {
+    for (Long[] array : productsOrder){
+      if (array == null || array.length != 2){
+          throw new IllegalArgumentException("size should be 2 for all arrays");
+      } 
+  } 
 		this.productsOrder = productsOrder;
 	}
 
-  public Long getNumberOfProduct() {
-    Long sum=0L;
-    for (Long f : productsOrder.values()) {
-      sum += f;
-  }
-    return sum;
-  }
+  // public Integer getNumberOfProduct() {
+  //   int sum=0;
+  //   for (int f : productsOrder.values()) {
+  //     sum += f;
+  // }
+  //   return sum;
+  // }
 
 }
