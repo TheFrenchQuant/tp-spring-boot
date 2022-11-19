@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URI;
+import org.springframework.web.client.RestTemplate;
+
 import fr.ensimag.product.Product;
 
 @RestController
-
 public class InvoiceController {
 
 	@Value("${server.port}")
@@ -94,7 +96,7 @@ public class InvoiceController {
 	}
 
 	@GetMapping("/invoices/{id}/count")
-	public ResponseEntity<Long> getInvoiceById(@PathVariable("id") long id) {
+	public ResponseEntity<Long> getInvoiceCount(@PathVariable("id") long id) {
 		Optional<Invoice> invoiceData = InvoiceRepository.findById(id);
 
 		if (invoiceData.isPresent()) {
@@ -103,6 +105,26 @@ public class InvoiceController {
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+	}
+
+	@GetMapping("/invoices/{id}/cost")
+	public ResponseEntity<Float> getInvoice(@PathVariable("id") long id) {
+		Optional<Invoice> invoiceData = InvoiceRepository.findById(id);
+
+		if (invoiceData.isPresent()) {
+			String uri = "http://localhost:8080/products/list/{ids}";
+			String ids = String.join(",", invoiceData.get().order.values().toArray(new String[0]));
+			RestTemplate restTemplate = new RestTemplate();
+			Product[] products = restTemplate.getForObject(uri, Product[].class,ids);
+			if(products!=null){
+				Float cost = 0f;
+				for (Product product : products){
+				cost+=product.getPrice();
+				}
+				return new ResponseEntity<>(cost, HttpStatus.OK);
+			}
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
 }

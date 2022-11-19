@@ -10,11 +10,11 @@ public class Invoice {
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private Long id;
   private String client; 
-  Map<String, Integer> order;
+  Map<String, Long> order;
 
   protected Invoice() {}
 
-  public Invoice(String client,  Map<String, Integer> order) {
+  public Invoice(String client,  Map<String, Long> order) {
     this.client = client;
     this.order = order;
   }
@@ -38,17 +38,17 @@ public class Invoice {
 		this.client = client;
 	}
 
-  public Map<String, Integer> getOrder() {
+  public Map<String, Long> getOrder() {
     return order;
   }
 
-  public void setOrder(Map<String, Integer> order) {
+  public void setOrder(Map<String, Long> order) {
 		this.order = order;
 	}
 
   public Long getNumberOfProduct() {
     Long sum=0L;
-    for (int f : order.values()) {
+    for (Long f : order.values()) {
       sum += f;
   }
     return sum;

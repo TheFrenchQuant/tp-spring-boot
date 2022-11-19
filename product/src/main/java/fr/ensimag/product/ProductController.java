@@ -111,11 +111,11 @@ public class ProductController {
 	}
 
 	@GetMapping("/products/list/{ids}")
-	public ResponseEntity<List<Product>> getProductById(@PathVariable List<Long> ids) {
-		List<Product> productData = productRepository.findByIdIn(ids);
+	public ResponseEntity<Product[]> getProductById(@PathVariable Long[] ids) {
+		Product[] productData = productRepository.findByIdIn(ids);
 
-		if (!productData.isEmpty()) {
-			return new ResponseEntity<List<Product>>(productData, HttpStatus.OK);
+		if (productData == null) {
+			return new ResponseEntity<Product[]>(productData, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
