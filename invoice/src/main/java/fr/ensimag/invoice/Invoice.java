@@ -10,14 +10,17 @@ public class Invoice {
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private Long id;
   private String client;
-
-  Map<Long, Long> order;
+  
+  @Lob
+  Map<String, Long> productsOrder;
+  //private Long[] products;
+  //private Long[] quantity;
 
   protected Invoice() {}
 
-  public Invoice(String client,  Map<Long, Long> order) {
+  public Invoice(String client,  Map<String, Long> productsOrder) {
     this.client = client;
-    this.order = order;
+    this.productsOrder = productsOrder;
   }
 
   // @Override
@@ -39,17 +42,17 @@ public class Invoice {
 		this.client = client;
 	}
 
-  public Map<Long, Long> getOrder() {
-    return order;
+  public Map<String, Long> getOrder() {
+    return productsOrder;
   }
 
-  public void setOrder(Map<Long, Long> order) {
-		this.order = order;
+  public void setOrder(Map<String, Long> productsOrder) {
+		this.productsOrder = productsOrder;
 	}
 
   public Long getNumberOfProduct() {
     Long sum=0L;
-    for (Long f : order.values()) {
+    for (Long f : productsOrder.values()) {
       sum += f;
   }
     return sum;

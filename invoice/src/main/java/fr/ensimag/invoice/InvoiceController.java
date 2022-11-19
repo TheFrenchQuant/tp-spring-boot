@@ -113,13 +113,13 @@ public class InvoiceController {
 
 		if (invoiceData.isPresent()) {
 			String uri = "http://localhost:8080/products/list/{ids}";
-			String ids = String.join(",", invoiceData.get().order.values().toArray(new String[0]));
+			String ids = String.join(",", invoiceData.get().productsOrder.keySet().toArray(new String[0]));
 			RestTemplate restTemplate = new RestTemplate();
 			Product[] products = restTemplate.getForObject(uri, Product[].class,ids);
 			if(products!=null){
 				Float cost = 0f;
 				for (Product product : products){
-				cost+=product.getPrice();
+				cost+=product.getPrice()*invoiceData.get().productsOrder.get(product.getId().toString());
 				}
 				return new ResponseEntity<>(cost, HttpStatus.OK);
 			}
