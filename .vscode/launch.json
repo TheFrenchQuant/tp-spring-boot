@@ -9,6 +9,26 @@
             "projectName": "product",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-EurekaApplication<eureka>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "fr.ensimag.eureka.EurekaApplication",
+            "projectName": "eureka",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-AdminApplication<admin>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "fr.ensimag.admin.AdminApplication",
+            "projectName": "admin",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

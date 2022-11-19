@@ -9,12 +9,13 @@ public class Invoice {
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private Long id;
-  private String client; 
-  Map<String, Long> order;
+  private String client;
+
+  Map<Long, Long> order;
 
   protected Invoice() {}
 
-  public Invoice(String client,  Map<String, Long> order) {
+  public Invoice(String client,  Map<Long, Long> order) {
     this.client = client;
     this.order = order;
   }
@@ -38,11 +39,11 @@ public class Invoice {
 		this.client = client;
 	}
 
-  public Map<String, Long> getOrder() {
+  public Map<Long, Long> getOrder() {
     return order;
   }
 
-  public void setOrder(Map<String, Long> order) {
+  public void setOrder(Map<Long, Long> order) {
 		this.order = order;
 	}
 
