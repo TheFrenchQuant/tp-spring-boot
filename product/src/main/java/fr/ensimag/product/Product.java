@@ -11,13 +11,15 @@ public class Product {
   private Long id;
   //@Column(name = "name") regarder si nécessaire
   private String name;
+  private String description;
   private Float price;
   private Long quantity;
 
   protected Product() {}
 
-  public Product(String name, Float price, Long quantity) {
+  public Product(String name,String description, Float price, Long quantity) {
     this.name = name;
+    this.description= description;
     this.price = price;
     this.quantity= quantity;
   }
@@ -39,6 +41,14 @@ public class Product {
 
   public void setName(String name) {
 		this.name = name;
+	}
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+		this.description = description;
 	}
 
   public float getPrice() {

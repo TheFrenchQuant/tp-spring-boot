@@ -61,12 +61,13 @@ public class Invoice {
 		this.productsOrder = productsOrder;
 	}
 
-  // public Integer getNumberOfProduct() {
-  //   int sum=0;
-  //   for (int f : productsOrder.values()) {
-  //     sum += f;
-  // }
-  //   return sum;
-  // }
+  public Long getNumberOfProduct() {
+    Long sum=0L;
+
+    for (Long[] product : productsOrder) {
+      sum += product[1];
+  }
+    return sum;
+  }
 
 }
