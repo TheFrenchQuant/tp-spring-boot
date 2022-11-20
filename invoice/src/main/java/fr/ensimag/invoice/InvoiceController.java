@@ -1,6 +1,7 @@
 package fr.ensimag.invoice;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 //import java.net.URI;
 //import org.springframework.web.client.RestTemplate;
 
-//import fr.ensimag.product.Product;
+import fr.ensimag.product.Product;
+import org.springframework.web.reactive.function.client.WebClient;
+
+
 
 @RestController
 public class InvoiceController {
@@ -69,8 +73,7 @@ public class InvoiceController {
 	@PostMapping("/invoices")
 	public ResponseEntity<Invoice> createInvoice(@RequestBody Invoice invoice) {
 		try {
-			Invoice _invoice = invoiceRepository
-					.save(new Invoice(invoice.getClient(), invoice.getProductsOrder()));
+			Invoice _invoice = invoiceRepository.save(invoice);
 			return new ResponseEntity<>(_invoice, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -114,34 +117,52 @@ public class InvoiceController {
 
 	@GetMapping("/invoices/{id}/count")
 	public ResponseEntity<Long> getInvoiceCount(@PathVariable("id") long id) {
+
 		Optional<Invoice> invoiceData = invoiceRepository.findById(id);
 
 		if (invoiceData.isPresent()) {
-			//List<Product> products = RestTemplate().getForObject(uri, Employee[].class);
-			return new ResponseEntity<>(invoiceData.get().getNumberOfProduct(), HttpStatus.OK);
+			return new ResponseEntity<>(invoiceData.get().NumberOfProduct(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 
-	// @GetMapping("/invoices/{id}/cost")
-	// public ResponseEntity<Float> getInvoice(@PathVariable("id") long id) {
-	// 	Optional<Invoice> invoiceData = InvoiceRepository.findById(id);
+	@GetMapping("/invoices/{id}/cost")
+	public ResponseEntity<Float> getInvoice(@PathVariable("id") long id) {
 
-	// 	if (invoiceData.isPresent()) {
-	// 		String uri = "http://localhost:8080/products/list/{ids}";
-	// 		String ids = String.join(",", invoiceData.get().productsOrder.keySet().toArray(new String[0]));
-	// 		RestTemplate restTemplate = new RestTemplate();
-	// 		Product[] products = restTemplate.getForObject(uri, Product[].class,ids);
-	// 		if(products!=null){
-	// 			Float cost = 0f;
-	// 			for (Product product : products){
-	// 			cost+=product.getPrice()*invoiceData.get().productsOrder.get(product.getId().toString());
-	// 			}
-	// 			return new ResponseEntity<>(cost, HttpStatus.OK);
-	// 		}
-	// 	}
-	// 	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	// }
+		Optional<Invoice> invoiceData = invoiceRepository.findById(id);
+
+		if (invoiceData.isPresent()) {
+			Invoice invoice= invoiceData.get();
+
+			List<String> idlist = new ArrayList<String>();
+
+			for (Long key : invoice.productsOrder.keySet()) {
+  				idlist.add(key.toString());
+    		}
+  			
+			String url = "http://localhost:8080/products/list/"+String.join(",", idlist);
+
+
+		WebClient.Builder builder = WebClient.builder();
+		
+		Product[] products = builder.
+						build().
+						get().
+						uri(url).
+						retrieve().
+						bodyToMono(Product[].class).
+						block();
+
+			if(products!=null && products.length==invoice.productsOrder.size()){
+				Float cost = 0f;
+				for (Product product : products){
+				cost+=product.getPrice()*invoice.productsOrder.get(product.getId());
+				}
+				return new ResponseEntity<>(cost, HttpStatus.OK);
+			}
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
 
 }

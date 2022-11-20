@@ -115,7 +115,7 @@ public class ProductController {
 	public ResponseEntity<Product[]> getProductById(@PathVariable Long[] ids) {
 		Product[] productData = productRepository.findByIdIn(ids);
 
-		if (productData == null) {
+		if (productData != null) {
 			return new ResponseEntity<Product[]>(productData, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

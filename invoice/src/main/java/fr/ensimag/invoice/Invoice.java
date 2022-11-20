@@ -1,6 +1,6 @@
 package fr.ensimag.invoice;
 
-//import java.util.*;
+import java.util.*;
 import javax.persistence.*;
 
 @Entity
@@ -12,29 +12,27 @@ public class Invoice {
 
   private String client;
   
-  @Lob
-  Long[][] productsOrder;
-  //private Long[] products;
-  //private Long[] quantity;
+  @ElementCollection(fetch = FetchType.LAZY)
+  @CollectionTable(name = "raw_events_custom", joinColumns = @JoinColumn(name ="raw_event_id"))
+  @MapKeyColumn(name = "field_key", length = 50)
+  @Column(name = "field_val", length = 100)
+  Map<Long,Long> productsOrder;
+
 
   protected Invoice() {}
 
-  public Invoice(String client,  Long[][] productsOrder) {
-    for (Long[] array : productsOrder){
-      if (array == null || array.length != 2){
-          throw new IllegalArgumentException("size should be 2 for all arrays");
-      } 
-  } 
-    this.client = client;
-    this.productsOrder = productsOrder;
-  }
+  public Invoice(String client,  Map<Long,Long> productsOrder) {
 
-  // @Override
-  // public String toString() {
-  //   return String.format(
-  //       "Customer[id=%d, name='%s', price='%f, quantity='%d']",
-  //       id,name, price, quantity);
-  // }
+  this.client = client;
+
+  this.productsOrder = productsOrder;
+}
+
+
+  @Override
+  public String toString() {
+    return productsOrder.toString();
+  }
 
   public Long getId() {
     return id;
@@ -48,25 +46,21 @@ public class Invoice {
 		this.client = client;
 	}
 
-  public Long[][] getProductsOrder() {
+  public Map<Long,Long> getProductsOrder() {
     return productsOrder;
   }
 
-  public void setProductsOrder(Long[][] productsOrder) {
-    for (Long[] array : productsOrder){
-      if (array == null || array.length != 2){
-          throw new IllegalArgumentException("size should be 2 for all arrays");
-      } 
-  } 
+  public void setProductsOrder(Map<Long,Long> productsOrder) {
 		this.productsOrder = productsOrder;
 	}
 
-  public Long getNumberOfProduct() {
+  public Long NumberOfProduct() {
     Long sum=0L;
 
-    for (Long[] product : productsOrder) {
-      sum += product[1];
-  }
+    for ( Long quantity : productsOrder.values() ) {
+      sum+=quantity;
+    }
+
     return sum;
   }
 
