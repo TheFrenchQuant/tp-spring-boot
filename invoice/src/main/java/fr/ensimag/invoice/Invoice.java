@@ -7,27 +7,26 @@ import javax.persistence.*;
 public class Invoice {
 
   @Id
-  @GeneratedValue(strategy=GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   private String client;
-  
+
   @ElementCollection(fetch = FetchType.LAZY)
-  @CollectionTable(name = "raw_events_custom", joinColumns = @JoinColumn(name ="raw_event_id"))
+  @CollectionTable(name = "raw_events_custom", joinColumns = @JoinColumn(name = "raw_event_id"))
   @MapKeyColumn(name = "field_key", length = 50)
   @Column(name = "field_val", length = 100)
-  Map<Long,Long> productsOrder;
+  Map<Long, Long> productsOrder;
 
+  protected Invoice() {
+  }
 
-  protected Invoice() {}
+  public Invoice(String client, Map<Long, Long> productsOrder) {
 
-  public Invoice(String client,  Map<Long,Long> productsOrder) {
+    this.client = client;
 
-  this.client = client;
-
-  this.productsOrder = productsOrder;
-}
-
+    this.productsOrder = productsOrder;
+  }
 
   @Override
   public String toString() {
@@ -43,22 +42,22 @@ public class Invoice {
   }
 
   public void setClient(String client) {
-		this.client = client;
-	}
+    this.client = client;
+  }
 
-  public Map<Long,Long> getProductsOrder() {
+  public Map<Long, Long> getProductsOrder() {
     return productsOrder;
   }
 
-  public void setProductsOrder(Map<Long,Long> productsOrder) {
-		this.productsOrder = productsOrder;
-	}
+  public void setProductsOrder(Map<Long, Long> productsOrder) {
+    this.productsOrder = productsOrder;
+  }
 
   public Long NumberOfProduct() {
-    Long sum=0L;
+    Long sum = 0L;
 
-    for ( Long quantity : productsOrder.values() ) {
-      sum+=quantity;
+    for (Long quantity : productsOrder.values()) {
+      sum += quantity;
     }
 
     return sum;

@@ -23,8 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.ensimag.product.Product;
 import org.springframework.web.reactive.function.client.WebClient;
 
-
-
 @RestController
 public class InvoiceController {
 
@@ -34,10 +32,9 @@ public class InvoiceController {
 	@Autowired
 	InvoiceRepository invoiceRepository;
 
-
 	@GetMapping("/port")
 	public ResponseEntity<String> getPort() {
-		
+
 		return new ResponseEntity<>(serverPort, HttpStatus.OK);
 
 	}
@@ -46,9 +43,9 @@ public class InvoiceController {
 	public ResponseEntity<List<Invoice>> getAllProducts() {
 		try {
 			List<Invoice> invoices = new ArrayList<Invoice>();
-			
+
 			invoiceRepository.findAll().forEach(invoices::add); // on peut faire plus court non ?
-			
+
 			if (invoices.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
@@ -133,31 +130,24 @@ public class InvoiceController {
 		Optional<Invoice> invoiceData = invoiceRepository.findById(id);
 
 		if (invoiceData.isPresent()) {
-			Invoice invoice= invoiceData.get();
+			Invoice invoice = invoiceData.get();
 
 			List<String> idlist = new ArrayList<String>();
 
 			for (Long key : invoice.productsOrder.keySet()) {
-  				idlist.add(key.toString());
-    		}
-  			
-			String url = "http://localhost:8080/products/list/"+String.join(",", idlist);
+				idlist.add(key.toString());
+			}
 
+			String url = "http://localhost:8080/products/list/" + String.join(",", idlist);
 
 			WebClient.Builder builder = WebClient.builder();
-		
-			Product[] products = builder.
-						build().
-						get().
-						uri(url).
-						retrieve().
-						bodyToMono(Product[].class).
-						block();
 
-			if(products!=null && products.length==invoice.productsOrder.size()){
+			Product[] products = builder.build().get().uri(url).retrieve().bodyToMono(Product[].class).block();
+
+			if (products != null && products.length == invoice.productsOrder.size()) {
 				Float cost = 0f;
-				for (Product product : products){
-				cost+=product.getPrice()*invoice.productsOrder.get(product.getId());
+				for (Product product : products) {
+					cost += product.getPrice() * invoice.productsOrder.get(product.getId());
 				}
 				return new ResponseEntity<>(cost, HttpStatus.OK);
 			}
