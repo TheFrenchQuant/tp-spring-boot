@@ -125,7 +125,7 @@ public class InvoiceController {
 	}
 
 	@GetMapping("/invoices/{id}/cost")
-	public ResponseEntity<Float> getInvoice(@PathVariable("id") long id) {
+	public ResponseEntity<Float> getCost(@PathVariable("id") long id) {
 
 		Optional<Invoice> invoiceData = invoiceRepository.findById(id);
 
