@@ -2,27 +2,13 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Spring Boot-ProductApplication<product>",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "mainClass": "fr.ensimag.product.ProductApplication",
-            "projectName": "product",
-            "args": "",
-            "envFile": "${workspaceFolder}/.env",
-            "noDebug": true,
-            "__progressId": "87d078fd-1138-44c3-807d-f3878a9eee18"
-        },
-        {
-            "type": "java",
             "name": "Spring Boot-EurekaApplication<eureka>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "mainClass": "fr.ensimag.eureka.EurekaApplication",
             "projectName": "eureka",
             "args": "",
-            "envFile": "${workspaceFolder}/.env",
-            "noDebug": true,
-            "__progressId": "42661dfd-aba3-449d-b46b-e934773e3a2b"
+            "envFile": "${workspaceFolder}/.env"
         },
         {
             "type": "java",
@@ -32,9 +18,17 @@
             "mainClass": "fr.ensimag.admin.AdminApplication",
             "projectName": "admin",
             "args": "",
-            "envFile": "${workspaceFolder}/.env",
-            "noDebug": true,
-            "__progressId": "5c3d76dd-68fe-4a00-8d6b-1e40a9795405"
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ProductApplication<product>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "fr.ensimag.product.ProductApplication",
+            "projectName": "product",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         },
         {
             "type": "java",
@@ -43,6 +37,16 @@
             "cwd": "${workspaceFolder}",
             "mainClass": "fr.ensimag.invoice.InvoiceApplication",
             "projectName": "invoice",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-LoadBalancerApplication<loadbalancer>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "fr.ensimag.loadbalancer.LoadBalancerApplication",
+            "projectName": "loadbalancer",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }

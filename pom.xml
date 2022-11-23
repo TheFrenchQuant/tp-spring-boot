@@ -13,5 +13,6 @@
       <module>admin</module>
       <module>product</module>
       <module>invoice</module>
+      <module>loadbalancer</module>
     </modules>
 </project>
