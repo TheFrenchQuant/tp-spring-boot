@@ -12,10 +12,10 @@ public class Invoice {
 
   private String client;
 
-  @ElementCollection(fetch = FetchType.LAZY)
-  @CollectionTable(name = "raw_events_custom", joinColumns = @JoinColumn(name = "raw_event_id"))
-  @MapKeyColumn(name = "field_key", length = 50)
-  @Column(name = "field_val", length = 100)
+  @ElementCollection
+  @CollectionTable(name = "productsOrder", joinColumns = @JoinColumn(name = "productsOrder_id"))
+  @MapKeyColumn(name = "product_id")
+  @Column(name = "quantity")
   Map<Long, Long> productsOrder;
 
   protected Invoice() {

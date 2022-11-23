@@ -15,4 +15,4 @@ INSERT INTO "PUBLIC"."PRODUCT" VALUES
 (2, 'OK', 'Samsung', 900.0, 20),
 (3, 'Nice', 'Google', 800.0, 30),
 (4, 'Cool', 'Xiaomi', 700.0, 40),
-(5, 'Fun', 'Sony', 600.0, 50);     
+(5, 'Fun', 'Sony', 600.0, 50);              

@@ -1,13 +1,7 @@
 package fr.ensimag.loadbalancer;
 
-// import java.util.ArrayList;
-// import java.util.Arrays;
 import java.util.List;
-// import java.util.Optional;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,15 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import reactor.core.publisher.Mono;
-//import java.net.URI;
-//import org.springframework.web.client.RestTemplate;
-
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
-//import org.springframework.cloud.client.loadbalancer.reactive.ReactorLoadBalancerExchangeFilterFunction;
-
 import fr.ensimag.invoice.Invoice;
 
 
@@ -36,8 +24,6 @@ public class LoadBalancerController {
 
 	@Autowired
 	private WebClient.Builder loadBalancedWebClientBuilder;
-
-
 
     @GetMapping("/port")
     Mono<String> getPort() {
