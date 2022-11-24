@@ -1,10 +1,10 @@
-package fr.ensimag.productapi;
+package fr.ensimag.productservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ProductApiApplicationTests {
+class ProductApplicationTests {
 
 	@Test
 	void contextLoads() {
