@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
-import fr.ensimag.invoice.Invoice;
+import fr.ensimag.invoiceapi.Invoice;
 
 
 @RestController
