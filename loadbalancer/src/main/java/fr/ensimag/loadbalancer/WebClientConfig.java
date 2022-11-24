@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
-@LoadBalancerClient(name = "invoice")
+@LoadBalancerClient(name = "invoice-service")
 public class WebClientConfig {
 
   @LoadBalanced
