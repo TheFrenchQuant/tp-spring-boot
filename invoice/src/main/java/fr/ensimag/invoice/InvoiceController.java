@@ -40,7 +40,7 @@ public class InvoiceController {
 	}
 
 	@GetMapping("/invoices")
-	public ResponseEntity<List<Invoice>> getAllProducts() {
+	public ResponseEntity<List<Invoice>> getAllInvoices() {
 		try {
 			List<Invoice> invoices = new ArrayList<Invoice>();
 
