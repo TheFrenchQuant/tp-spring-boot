@@ -1,0 +1,54 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-EurekaApplication<eureka>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "fr.ensimag.eureka.EurekaApplication",
+            "projectName": "eureka",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-AdminApplication<admin>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "fr.ensimag.admin.AdminApplication",
+            "projectName": "admin",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ProductApplication<Product-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "fr.ensimag.productservice.ProductApplication",
+            "projectName": "product-service",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-InvoiceApplication<invoice-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "fr.ensimag.invoiceservice.InvoiceApplication",
+            "projectName": "invoice-service",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-LoadBalancerApplication<loadbalancer>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "fr.ensimag.loadbalancer.LoadBalancerApplication",
+            "projectName": "loadbalancer",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

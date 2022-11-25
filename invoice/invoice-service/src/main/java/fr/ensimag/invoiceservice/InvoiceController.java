@@ -1,10 +1,8 @@
 package fr.ensimag.invoiceservice;
 
 import java.util.ArrayList;
-//import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -16,10 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-//import java.net.URI;
-//import org.springframework.web.client.RestTemplate;
-
 import fr.ensimag.productapi.Product;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -150,6 +144,41 @@ public class InvoiceController {
 					cost += product.getPrice() * invoice.productsOrder.get(product.getId());
 				}
 				return new ResponseEntity<>(cost, HttpStatus.OK);
+			}
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+
+	@GetMapping("/invoices/{id}/max")
+	public ResponseEntity<Product> getMax(@PathVariable("id") long id) {
+
+		Optional<Invoice> invoiceData = invoiceRepository.findById(id);
+
+		if (invoiceData.isPresent()) {
+			Invoice invoice = invoiceData.get();
+
+			List<String> idlist = new ArrayList<String>();
+
+			for (Long key : invoice.productsOrder.keySet()) {
+				idlist.add(key.toString());
+			}
+
+			String url = "http://localhost:8080/products/list/" + String.join(",", idlist);
+
+			WebClient.Builder builder = WebClient.builder();
+
+			Product[] products = builder.build().get().uri(url).retrieve().bodyToMono(Product[].class).block();
+
+			if (products != null && products.length == invoice.productsOrder.size()) {
+
+				Product maxproduct = products[0];
+
+				for (int i = 1; i < products.length; i++) {
+					if (maxproduct.getPrice() < products[i].getPrice()) {
+						maxproduct = products[i];
+					}
+				}
+				return new ResponseEntity<>(maxproduct, HttpStatus.OK);
 			}
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);

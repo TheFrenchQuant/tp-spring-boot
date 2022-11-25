@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
-
 @RestController
 
 public class ProductController {
@@ -32,9 +30,9 @@ public class ProductController {
 	public ResponseEntity<List<Product>> getAllProducts() {
 		try {
 			List<Product> products = new ArrayList<Product>();
-			
+
 			productRepository.findAll().forEach(products::add); // on peut faire plus court non ?
-			
+
 			if (products.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
@@ -47,7 +45,7 @@ public class ProductController {
 
 	@GetMapping("/port")
 	public ResponseEntity<String> getPort() {
-		
+
 		return new ResponseEntity<>(serverPort, HttpStatus.OK);
 
 	}
@@ -67,7 +65,8 @@ public class ProductController {
 	public ResponseEntity<Product> createProduct(@RequestBody Product product) {
 		try {
 			Product _product = productRepository
-					.save(new Product(product.getName(),product.getDescription(), product.getPrice(), product.getQuantity()));
+					.save(new Product(product.getName(), product.getDescription(), product.getPrice(),
+							product.getQuantity()));
 			return new ResponseEntity<>(_product, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -121,6 +120,5 @@ public class ProductController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-
 
 }
