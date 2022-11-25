@@ -10,7 +10,7 @@
   	</parent>
     <groupId>fr.ensimag</groupId>
     <artifactId>invoice</artifactId>
-    <version>0.1.0</version>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
